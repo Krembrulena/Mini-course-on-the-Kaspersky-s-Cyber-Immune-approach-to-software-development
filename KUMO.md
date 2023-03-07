@@ -55,3 +55,9 @@
 1. Злоумышленник подменяет обновление на поврежденное, чтобы исполнить вредоносный код на КУМО.
 2. Злоумышленник пытается подобрать пароль к аккаунту Администратора.
 3. Злоумышленник получает доступ во внутреннюю сеть (не через КУМО) и проводит атаку на КУМО из внутренней сети.
+
+# Архитектура
+
+![Обновление](https://github.com/Krembrulena/Mini-course-on-the-Kaspersky-s-Cyber-Immune-approach-to-software-development/blob/main/Архитектура/Обновление.png)
+![Журналирование](https://github.com/Krembrulena/Mini-course-on-the-Kaspersky-s-Cyber-Immune-approach-to-software-development/blob/main/Архитектура/Журналирование.png)
+![Оповещение пользователя и формирование отчетов](https://github.com/Krembrulena/Mini-course-on-the-Kaspersky-s-Cyber-Immune-approach-to-software-development/blob/main/Архитектура/Оповещение%20пользователя%20и%20формирование%20отчетов.png)
