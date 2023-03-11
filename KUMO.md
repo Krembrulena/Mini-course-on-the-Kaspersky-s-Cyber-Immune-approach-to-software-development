@@ -72,6 +72,51 @@
 
 ## Архитектура <a name="#архитектура-"></a>
 
-![Обновление](https://github.com/Krembrulena/Mini-course-on-the-Kaspersky-s-Cyber-Immune-approach-to-software-development/blob/main/Архитектура/Обновление.png)
-![Журналирование](https://github.com/Krembrulena/Mini-course-on-the-Kaspersky-s-Cyber-Immune-approach-to-software-development/blob/main/Архитектура/Журналирование.png)
-![Оповещение пользователя и формирование отчетов](https://github.com/Krembrulena/Mini-course-on-the-Kaspersky-s-Cyber-Immune-approach-to-software-development/blob/main/Архитектура/Оповещение%20пользователя%20и%20формирование%20отчетов.png)
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'monotoneX' } } }%%
+graph LR
+  classDef untrust fill:#fac8c8, stroke:red, color:black;
+  classDef trust fill:#bfe9e3, stroke:#006d5d, color:black;
+  classDef conversion fill:#fff9c3, stroke:#ffe810, color:black;
+  classDef Sub fill:#e8e8e8, stroke: #e8e8e8;
+  subgraph Inner ["Inner"]
+    
+    subgraph KUMO ["KUMO"]
+      direction TB
+      
+      subgraph BL ["Buisness Logic"]
+        direction LR
+        in(Data Input)-->prc(Data Processor)-->out(Data Output)
+        prc(Data Processor)-->log(Logger) 
+      end
+    log(Logger)-->str3[(Storage)]
+
+    subgraph SU ["Secure Update"]
+      direction LR
+      mng(Manager)-->vrf(Verifier)
+      upd(Updater)-->str1[(Storage)]
+      vrf(Verifier)-->str1[(Storage)]
+      vrf(Verifier)-->str2[(Storage)]
+      mng(Manager)-->dwn(Downloader)
+      dwn(Downloader)-->str2[(Storage)]
+      mng(Manager)-->upd(Updater)   
+      end
+    end
+    
+    dev(Devices)-->in
+    
+  end  
+  fs(FileServer)<-->|"Запрос и получение обновления"|dwn
+  out-->wapp(Web App)
+  wapp(Web App)-->mng
+  wapp(Web App)-->log
+  log-->wapp(Web App)
+  
+
+  class BL,SU Sub
+  class str2,mng,dwn,fs,wapp untrust
+  class upd,vrf,log conversion
+  class str1,str3,dev,in,prc,out trust
+  linkStyle 0,1,2,3,5,6,7,11,13,16 color:green, stroke: green;
+  linkStyle 4,8,9,10,12,14,15 color:red, stroke: red; 
+```
