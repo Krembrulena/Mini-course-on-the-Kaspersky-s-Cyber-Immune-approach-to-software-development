@@ -80,7 +80,7 @@ graph LR
   classDef conversion fill:#fff9c3, stroke:#ffe810, color:black;
   classDef Sub fill:#e8e8e8, stroke: #e8e8e8;
   subgraph Inner ["Inner"]
-    
+    log(Logger)-->str3[(Storage)]
     subgraph KUMO ["KUMO"]
       direction TB
       
@@ -89,7 +89,7 @@ graph LR
         in(Data Input)-->prc(Data Processor)-->out(Data Output)
         prc(Data Processor)-->log(Logger) 
       end
-    log(Logger)-->str3[(Storage)]
+    
 
     subgraph SU ["Secure Update"]
       direction LR
