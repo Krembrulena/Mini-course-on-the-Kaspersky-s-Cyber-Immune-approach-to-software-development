@@ -1,0 +1,55 @@
+### data ingest
+
+POST http://localhost:5003/ingest HTTP/1.1
+content-type: application/json
+# auth: very-secure-token
+
+[
+    {
+        "param_name": "RHumidity",
+        "param_units": "%",
+        "param_value": 40
+    },
+    {
+        "param_name": "Temperature",
+        "param_units": "C",
+        "param_value": 20
+    },
+    {
+        "param_name": "Pressure",
+        "param_units": "Pa",
+        "param_value": 101325
+    }
+]
+
+### get new alerts
+
+GET http://localhost:5002/alerts HTTP/1.1
+auth: very-secure-token
+
+
+### application
+
+GET http://localhost:5000/ HTTP/1.1
+
+
+### manager
+
+POST http://localhost:5002/update HTTP/1.1
+content-type: application/json
+auth: very-secure-token
+
+{
+    "url":"http://file_server:5001/download-update/app-update.zip", 
+    "target": "app", 
+    "digest": "c210497c79eba7568c2763202b27fd700a77e56eb065f1ab554a5fc0afbf475b", 
+    "digest_alg": "sha256"
+}
+
+
+### get update digest
+GET http://localhost:5001/get-digest/app-update.zip HTTP/1.1
+
+### get archived update file
+GET http://localhost:5001/download-update/app-update.zip HTTP/1.1
+
