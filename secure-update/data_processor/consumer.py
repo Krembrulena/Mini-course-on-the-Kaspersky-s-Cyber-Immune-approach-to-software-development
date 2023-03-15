@@ -112,6 +112,3 @@ def consumer_job(args, config):
 def start_consumer(args, config):
     threading.Thread(target=lambda: consumer_job(args, config)).start()
 
-
-# if __name__ == '__main__':
-#     start_consumer(None)
